@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "bracket-pair-colorizer-2.colors": [
+        "lightgreen",
+        "orange",
+        "mediumpurple"
+    ],
+    // "bracket-pair-colorizer-2.colorMode": "Independent"
+}
