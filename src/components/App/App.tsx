@@ -27,7 +27,7 @@ const App = () => {
       <ScrollDispatch.Provider value={scrollDispatch}>
         <div className='App'>
           <Header />
-          <ModeSelector props={{ appState }} />
+          <ModeSelector appState={appState} />
           <GroupSelector props={{ scrollState, appState }} />
           <VirtualizedCountryList props={{ appState }} />
         </div>

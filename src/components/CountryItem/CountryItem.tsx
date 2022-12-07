@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { FC } from 'react'
 import './CountryItem.css'
 
-const CountryItem = ({
-  props: { name, flag, borders, expandedBorderNames },
-  languageData,
-  currentModeIndex,
-  style
-}) => {
-  let borderCountries = []
+type CountryData = {
+  name: string
+  flag: string
+  borders: string[]
+  expandedBorderNames: string[]
+}
+
+type CountryItemProps = {
+  data: CountryData
+  languageData: string
+  currentModeIndex: number
+  style: any
+}
+
+const CountryItem: FC<CountryItemProps> = (props) => {
+  const { data, languageData, currentModeIndex, style } = props
+  const { name, flag, borders, expandedBorderNames } = data
+  let borderCountries: JSX.Element[] = []
   let languageComponent
   let displayName = name
 

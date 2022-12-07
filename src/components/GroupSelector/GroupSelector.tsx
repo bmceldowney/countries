@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
-import AppDataContext from '../../state/AppDataContext'
+import React, { FC, useContext, useState } from 'react'
+import AppDataContext, { PrefilteredCollection } from '../../state/AppDataContext'
 import Icon from '@material-ui/core/Icon'
 import {
+  AppState,
   AppStateDispatch,
   possibleModes,
   UPDATE_GROUP_ITEM_INDEX
@@ -9,18 +10,26 @@ import {
 import Popover from '@material-ui/core/Popover'
 
 import './GroupSelector.css'
+import { ScrollState } from '../../state/ScrollContext'
 
-const GroupSelector = ({ props: { scrollState, appState } }) => {
-  const [anchorEl, setAnchorEl] = useState(null)
+type GroupSelectorProps = {
+  appState: AppState
+  scrollState: ScrollState
+}
+
+const GroupSelector: FC<GroupSelectorProps> = (props) => {
+  const { appState, scrollState } = props
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null)
   const appDispatch = useContext(AppStateDispatch)
   const appData = useContext(AppDataContext)
-  const modeKey = possibleModes[appState.currentModeIndex].dataKey
-  const modeData = appData[modeKey]
+  const modeKey: string = possibleModes[appState.currentModeIndex].dataKey
+  const modeData: PrefilteredCollection = appData[modeKey]
   const groupName = modeData.mapArray[scrollState.topItemIndex]
 
-  const clickHandler = event => {
-    const index = parseInt(event.currentTarget.dataset.index, 10)
-    appDispatch({ type: UPDATE_GROUP_ITEM_INDEX, payload: index })
+  const clickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const value = event.currentTarget.dataset.index || ''
+    const index = parseInt(value, 10)
+    appDispatch && appDispatch({ type: UPDATE_GROUP_ITEM_INDEX, payload: index })
     handleClose()
   }
 
@@ -40,7 +49,7 @@ const GroupSelector = ({ props: { scrollState, appState } }) => {
     }
   )
 
-  const handleClick = event => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget)
   }
 

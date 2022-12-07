@@ -7,6 +7,6 @@ const InitializedApp = withData(App)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-
+    <InitializedApp />
   </React.StrictMode>
 )

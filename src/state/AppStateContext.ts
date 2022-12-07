@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AppStateDispatch = React.createContext(null)
+export const AppStateDispatch = React.createContext<React.Dispatch<AppAction> | null>(null)
 
 // action types
 export const UPDATE_CURRENT_MODE = 'UPDATE_CURRENT_MODE'
@@ -27,7 +27,7 @@ export const defaultAppState = {
   currentGroupItemIndex: 0
 }
 
-export const appReducer = (state, action) => {
+export const appReducer = (state: AppState, action: AppAction) => {
   switch (action.type) {
     case UPDATE_CURRENT_MODE:
       return { ...state, currentModeIndex: action.payload }
@@ -36,4 +36,14 @@ export const appReducer = (state, action) => {
     default:
       return state
   }
+}
+
+export type AppState = {
+  currentModeIndex: number
+  currentGroupItemIndex: number
+}
+
+type AppAction = {
+  type: 'UPDATE_CURRENT_MODE' | 'UPDATE_GROUP_ITEM_INDEX'
+  payload: number
 }

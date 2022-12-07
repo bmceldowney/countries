@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import dataFetch from '../data/dataFetch'
 import { AppDataProvider, defaultState } from '../state/AppDataContext'
 import withContext from './withContext'
 import { processData } from '../data/dataProcessor'
 
-const withData = (WrappedComponent: JSX.Element) => {
+const withData = (WrappedComponent: FC) => {
   return () => {
     const [state, setState] = useState(defaultState)
 

@@ -106,7 +106,7 @@ const VirtualizedCountryList = ({ props: { appState } }) => {
             height: `calc(${style.height}px - ${heightCalc})`
           }}
           key={key}
-          props={byIds[id]}
+          data={byIds[id]}
           languageData={appData[dataKey].mapArray[index]}
           currentModeIndex={appState.currentModeIndex}
         />

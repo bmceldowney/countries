@@ -9,7 +9,16 @@ export const defaultScrollState = {
   topItemIndex: 0
 }
 
-export const scrollReducer = (state, action) => {
+export type ScrollState = {
+  topItemIndex: number
+}
+
+export type ScrollAction = {
+  type: 'UPDATE_TOP_ITEM_INDEX'
+  payload: number
+}
+
+export const scrollReducer = (state: ScrollState, action: ScrollAction) => {
   switch (action.type) {
     case UPDATE_TOP_ITEM_INDEX:
       return { ...state, topItemIndex: action.payload }

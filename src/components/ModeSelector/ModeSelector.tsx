@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import Icon from '@material-ui/core/Icon'
 import {
+  AppState,
   AppStateDispatch,
   possibleModes,
   UPDATE_CURRENT_MODE
@@ -8,14 +9,20 @@ import {
 import Popover from '@material-ui/core/Popover'
 import './ModeSelector.css'
 
-const ModeSelector = ({ props: { appState } }) => {
-  const [anchorEl, setAnchorEl] = useState(null)
+type ModeSelectorProps = {
+  appState: AppState
+}
+
+const ModeSelector: FC<ModeSelectorProps> = (props) => {
+  const { appState } = props;
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null)
   const appDispatch = useContext(AppStateDispatch)
   const selectedModeIndex = appState.currentModeIndex
 
-  const clickHandler = event => {
-    const index = parseInt(event.currentTarget.dataset.index, 10)
-    appDispatch({ type: UPDATE_CURRENT_MODE, payload: index })
+  const clickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const value: string = event.currentTarget.dataset.index || '';
+    const index = parseInt(value, 10)
+    appDispatch && appDispatch({ type: UPDATE_CURRENT_MODE, payload: index })
     handleClose()
   }
 
@@ -33,7 +40,7 @@ const ModeSelector = ({ props: { appState } }) => {
     )
   })
 
-  const handleClick = event => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget)
   }
 

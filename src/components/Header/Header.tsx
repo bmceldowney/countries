@@ -1,7 +1,6 @@
-import React from 'react'
 import './Header.css'
 
-const Header = ({ mode }) => {
+const Header = () => {
   return (
     <header>
       <div className='title'>countries of the world</div>

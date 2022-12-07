@@ -1,11 +1,11 @@
+import { BreakData } from "../state/AppDataContext";
 import { CountriesByIdMap, Country } from "./types";
 
 /**
  * the web worker used to process the data from the API into the data
  * structures used by the app.
  */
-export const DataWorker: Worker = self as any;
-onmessage = (event) => {
+ addEventListener('message', (event) => {
   const data = event.data;
 
   const [allIds, byIds, onlyIslandIds] = populateAllIds(data);
@@ -43,7 +43,7 @@ onmessage = (event) => {
     },
     byIds,
   });
-};
+});
 
 /**
  * Gets an array of all country ids, sorted by the number of bordering countries
@@ -161,7 +161,7 @@ const buildSharedLanguageData = (languages: {
 }) => {
   let ids: Array<string> = [];
   const mapArray: Array<string> = [];
-  const breakData: { [id: number]: string } = {};
+  const breakData: BreakData = {};
 
   const alphaSort = (a: any, b: any) => {
     if (a > b) return 1;
