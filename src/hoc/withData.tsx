@@ -4,7 +4,7 @@ import { AppDataProvider, defaultState } from '../state/AppDataContext'
 import withContext from './withContext'
 import { processData } from '../data/dataProcessor'
 
-const withData = WrappedComponent => {
+const withData = (WrappedComponent: JSX.Element) => {
   return () => {
     const [state, setState] = useState(defaultState)
 
